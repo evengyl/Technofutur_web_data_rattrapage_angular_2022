@@ -6,8 +6,12 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './shared/compos/navbar/navbar.component';
 import { FooterComponent } from './shared/compos/footer/footer.component';
-import { FilmComponent } from './film/film.component';
-import { UserComponent } from './user/user.component';
+import { Onewaybinding1Component } from './demos/onewaybinding1/onewaybinding1.component';
+import { Twowaybinding2Component } from './demos/twowaybinding2/twowaybinding2.component';
+import { FormsModule } from '@angular/forms';
+import { Eventbinding3Component } from './demos/eventbinding3/eventbinding3.component';
+import { FourOfourComponent } from './shared/compos/four-ofour/four-ofour.component';
+import { PropertyModel4Component } from './property-model4/property-model4.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +19,16 @@ import { UserComponent } from './user/user.component';
     HomepageComponent,
     NavbarComponent,
     FooterComponent,
-    FilmComponent,
-    UserComponent
+    Onewaybinding1Component,
+    Twowaybinding2Component,
+    Eventbinding3Component,
+    FourOfourComponent,
+    PropertyModel4Component,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+<h4 class="blue-grey-text text-lighten-5">Two way binding</h4>
+<div class="card-panel red lighten-2">Ne pas oubliez d'aller injecter FormsModule dans le app.module.ts</div>
+
+<div class="row">
+    <div class="col m12">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Passage d'une variable depuis le ts vers l'html vers le ts !!</span>
+                <input [(ngModel)]="login" type="text" placeholder="login">
+                <p>Vous avez encodez tel login : {{ login }}</p>
+            </div>
+        </div>
+    </div>
+</div>
