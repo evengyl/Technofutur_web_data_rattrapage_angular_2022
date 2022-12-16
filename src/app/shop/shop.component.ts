@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartDTO } from '../shared/models/cartDTO.models';
 import { Product, ProductCard } from '../shared/models/product.models';
 import { AuthService } from '../shared/services/auth.service';
 import { ShopService } from '../shared/services/shop.service';
@@ -12,6 +13,7 @@ export class ShopComponent {
   isConnect : boolean = false
   listProductShop : Product[] = []
   myCart : ProductCard[] = []
+  nameCart : string = ""
 
   totalCard_TVAC : number = 0
   totalCard_HTVA : number = 0
@@ -65,6 +67,33 @@ export class ShopComponent {
       this.totalCard_TVAC += productFinded.price //tvac 
       this.totalCard_HTVA += (productFinded.price / 1.21) //htva
 
+    }
+  }
+
+ /* je vais devoir donner a mon futur back : productId,  qty */
+  saveCart()
+  {
+    if(this.myCart[0] != undefined)
+    {
+      let tmpCart = [...this.myCart] //pareil pour le object {...myObj}
+      let cartDto : CartDTO[] = []
+
+      tmpCart.forEach((prod) => {
+
+        let tmp : CartDTO = {
+          productId : prod.id,
+          qty : prod.qty
+        }
+
+        cartDto.push(tmp)
+      })
+
+      this.shopS.saveCart(cartDto, this.nameCart).subscribe((res) => {
+        this.myCart = []
+        this.nameCart = ""
+        this.totalCard_HTVA = 0
+        this.totalCard_TVAC = 0
+      })
     }
   }
 

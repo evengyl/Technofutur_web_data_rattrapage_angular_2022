@@ -3,7 +3,8 @@
 
 
 
-<div class="row" *ngIf="isConnect">
+<!-- <div class="row" *ngIf="isConnect"> FOR DEV DISABLED-->
+<div class="row">
     <div class="col m6">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
@@ -34,6 +35,13 @@
                     <li class="collection-item">Total HTVA : {{totalCard_HTVA | currency : "EUR" : "symbol" }}</li>
                     <li class="collection-item">Total TVAC : {{totalCard_TVAC | currency : "EUR" : "symbol" }}</li>
                 </ul>
+                <button class="btn green"
+                    [disabled]="myCart[0] == undefined || nameCart == ''" 
+                    (click)="saveCart()"
+                >
+                    Sauvegarder le panier
+                </button>
+                <input [disabled]="myCart[0] == undefined" type="text" [(ngModel)]="nameCart">
             </div>
         </div>
     </div>

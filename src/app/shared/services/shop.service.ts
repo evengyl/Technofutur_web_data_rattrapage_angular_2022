@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CartDTO } from '../models/cartDTO.models';
 import { Product } from '../models/product.models';
 
 @Injectable({
@@ -20,5 +21,11 @@ export class ShopService {
 
   getProduct() : Observable<any>{
     return this.httpC.get(this.baseUrl + "/products")
+  }
+
+
+  saveCart(cartDto : CartDTO[], nameCart : string)
+  {
+    return this.httpC.post(this.baseUrl + "/carts", { nameCart, cart : cartDto })
   }
 }
