@@ -3,9 +3,9 @@
         <a class="brand-logo">Technofutur Web-Data</a>
         <ul class="right hide-on-med-and-down">
             <li><a routerLink="/">Home</a></li>
-            <li><a routerLink="/">Connexion au webshop</a></li>
-            <li><a routerLink="/">Déconnexion</a></li>
-            <li><a routerLink="/shop">Shop</a></li>
+            <li *ngIf="!isConnect"><a routerLink="/auth">Connexion au webshop</a></li>
+            <li *ngIf="isConnect"><a routerLink="/">Déconnexion</a></li>
+            <li *ngIf="isConnect"><a routerLink="/shop">Shop</a></li>
         </ul>
     </div>
 </nav>

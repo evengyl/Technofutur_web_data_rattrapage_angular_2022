@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product, ProductCard } from '../shared/models/product.models';
+import { AuthService } from '../shared/services/auth.service';
+import { ShopService } from '../shared/services/shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -7,20 +9,24 @@ import { Product, ProductCard } from '../shared/models/product.models';
 })
 export class ShopComponent {
 
-  listProductShop : Product[] = [
-    { id : 1111, name : "12T Pro", price : 899, brand : "Xiaomi", desc : "Fait le café et le boudin blanc" },
-    { id : 2222, name : "14", price : 1600, brand : "Iphone", desc : "Fait le café et le boudin blanc" },
-    { id : 3333, name : "S22", price : 1200, brand : "Samsung", desc : "Fait le café et le boudin blanc" },
-    { id : 4444, name : "X11", price : 950, brand : "Oppo", desc : "Fait le café et le boudin blanc" }
-  ]
+  isConnect : boolean = false
+  listProductShop : Product[] = []
+  myCart : ProductCard[] = []
 
-  myCard : ProductCard[] = []
   totalCard_TVAC : number = 0
   totalCard_HTVA : number = 0
 
-  constructor(){
+  constructor(private shopS : ShopService, private authS : AuthService)
+  {
+    this.authS.isConnect$.subscribe((isConnect : boolean) => {
+      this.isConnect = isConnect
+    })
+    
+    this.shopS.getProduct().subscribe((dataBackend : Product[]) => {
+      this.listProductShop = dataBackend
+    })
   }
-
+  
 
   addProdToCard(prodId : number)
   {
@@ -31,7 +37,7 @@ export class ShopComponent {
     { 
 
       //on va voir dans le panier existant si le produit y est déjà !
-      let productExist = this.myCard.find(prod => prod.id == prodId) //par référence !!!! en mémoire c'est ce produits a la place 458595 
+      let productExist = this.myCart.find(prod => prod.id == prodId) //par référence !!!! en mémoire c'est ce produits a la place 458595 
                                                                       //-> alors il renvoi la valeur qu'a l'emplacement la.. et pas une copie
 
       if(productExist != undefined) //si oui ! c'est qu'on peux ajouter a la qty (1)
@@ -51,7 +57,7 @@ export class ShopComponent {
           qty : 1
         }
 
-        this.myCard.push(prodToAdd)
+        this.myCart.push(prodToAdd)
       }
 
 
